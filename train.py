@@ -195,7 +195,7 @@ def main():
     ## plot the sun
     myplot.plot_sun(4,'red',start_x + 7.5*carriage_length*21/20, 325, 50)
     
-    ## mytrain.final_rest(-600,500)
+    mytrain.final_rest(-600,500)
     
     turtlescreen.getcanvas().postscript(file="train.eps")
 
