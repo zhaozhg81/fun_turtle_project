@@ -6,6 +6,10 @@ Created on Sat Jun  5 17:53:34 2021
 @author: zhaozhg
 """
 
+import turtle
+from turtle_draw_shape import turtle_draw_shape
+import math
+
 class train:
     def __init__(self, turtlename):
         self.myturtle=turtlename
@@ -20,6 +24,7 @@ class train:
         ## The length of the connector is carriage_length/20
         ## The width of the connector is carriage_width/6
         self.myturtle.down()
+        self.myturtle.begin_fill()
         self.myturtle.setheading(90)
         self.myturtle.forward(carriage_width)
         self.myturtle.right(90)
@@ -39,6 +44,7 @@ class train:
         self.myturtle.right(90)
         self.myturtle.forward(carriage_length)
         self.myturtle.right(90)
+        self.myturtle.end_fill()
         self.myturtle.up()
         
         ## Plot the tyre
@@ -64,17 +70,17 @@ class train:
         self.myturtle.color(color)
         self.myturtle.down()
         self.myturtle.setheading(90)
-        
+        self.myturtle.begin_fill()
         self.myturtle.forward(loca_width)
         self.myturtle.right(90)
         self.myturtle.forward(loca_length*3/4)
         ## Draw a chimney
         self.myturtle.left(90)
-        self.myturtle.forward(loca_width/20)
+        self.myturtle.forward(loca_width/10)
         self.myturtle.right(90)
         self.myturtle.forward(loca_length/8)
         self.myturtle.right(90)
-        self.myturtle.forward(loca_width/20)
+        self.myturtle.forward(loca_width/10)
         self.myturtle.left(90)
         self.myturtle.backward(loca_length/8)
         self.myturtle.forward(loca_length/4)
@@ -83,6 +89,7 @@ class train:
         self.myturtle.right(90)
         self.myturtle.forward(loca_length)
         self.myturtle.right(90)
+        self.myturtle.end_fill()
         self.myturtle.up()
 
         ## Plot the tyre
@@ -93,19 +100,23 @@ class train:
         self.tyre(width, 'red', x_cur + loca_length*3/4, y_cur, radius_inner, radius_outer)
         
         ## Plot the window
-        self.window(width,'orange',x_cur + loca_length*1/2, y_cur+loca_width/2, loca_width/4)
-        self.window(width,'orange',x_cur + loca_length*3/4, y_cur+loca_width/2, loca_width/4)
+        self.window(width,'white',x_cur + loca_length*1/2, y_cur+loca_width/2, loca_width/4, True)
+        self.window(width,'white',x_cur + loca_length*3/4, y_cur+loca_width/2, loca_width/4, True)
         
-    def window(self, width, color, start_x, start_y, window_width):
+    def window(self, width, color, start_x, start_y, window_width, fill):
         self.myturtle.up()
         self.myturtle.setheading(90)
         self.myturtle.width(width)
         self.myturtle.color(color)
         self.myturtle.goto(start_x, start_y)
         self.myturtle.down()
+        if fill == True:
+            self.myturtle.begin_fill()
         for i in range(4):
             self.myturtle.forward(window_width)
             self.myturtle.right(90)
+        if fill==True:
+            self.myturtle.end_fill()
         self.myturtle.up()
         self.rest()
         
@@ -144,22 +155,29 @@ class train:
 
 
 def main():
-    carriage_width=100
-    carriage_length=200
-    start_x=-600
-    start_y=-200
+    carriage_width=90
+    carriage_length=180
+    start_x=-700
+    start_y=-300
     myturtle = turtle.getscreen()
     myturtle = turtle.Turtle()
     myturtle.shape('turtle')
-    myturtle.width(5)
+    myturtle.width(5)    
+    myplot = turtle_draw_shape(myturtle)
+    myplot.plot_fillable_rec('chartreuse4',-1000, -500, 400, 2000)
+    myplot.plot_fillable_rec('DeepSkyBlue',-1000, -100, 600, 2000)
+
     mytrain = train(myturtle)
-    mytrain.track(5,'black',start_x-50, start_y - carriage_length/8, carriage_length*6 )
-    colors=("blue","green","yellow","black")
-    for i in range(4):
+    mytrain.track(5,'black',start_x-50, start_y - carriage_length/8, carriage_length* 8)
+    colors=("purple","blue","green","yellow","orange")
+    for i in range(5):
         mytrain.carriage(5,colors[i],start_x+carriage_length*21/20*i,start_y,carriage_width,carriage_length)
     
-    mytrain.locamotive(5, 'red', start_x + 4*carriage_length*21/20, start_y, carriage_width*1.5, carriage_length*1.5)
-
+    mytrain.locamotive(5, 'red', start_x + 5*carriage_length*21/20, start_y, carriage_width*1.5, carriage_length*1.5)
+    for i in range(10):
+        myplot.plot_oval( 2,'grey', start_x + (6.1)*carriage_length*21/20 - carriage_length/5*i*i/3 ,start_y +carriage_width*1.5*1.2 + carriage_width/4*i, (i+1)*carriage_width*1.5/25, (i+1)*carriage_width*1.5/25/2, 0, True)    
+    myplot.rest()
+    myplot.plot_sun(4,'red',start_x + 7.5*carriage_length*21/20, 325, 100)
     
 if __name__=="__main__":
     main()
