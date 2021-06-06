@@ -54,6 +54,8 @@ class train:
         self.tyre(width, color, x_cur + carriage_length/4, y_cur, radius_inner, radius_outer)
         self.tyre(width, color, x_cur + carriage_length*3/4, y_cur, radius_inner, radius_outer)
         
+        self.rest()
+        
     def track(self, width, color, start_x, start_y, track_length):
         self.myturtle.up()
         self.myturtle.width(width)
@@ -103,6 +105,8 @@ class train:
         self.window(width,'white',x_cur + loca_length*1/2, y_cur+loca_width/2, loca_width/4, True)
         self.window(width,'white',x_cur + loca_length*3/4, y_cur+loca_width/2, loca_width/4, True)
         
+        self.rest()
+        
     def window(self, width, color, start_x, start_y, window_width, fill):
         self.myturtle.up()
         self.myturtle.setheading(90)
@@ -118,7 +122,6 @@ class train:
         if fill==True:
             self.myturtle.end_fill()
         self.myturtle.up()
-        self.rest()
         
 
     def tyre(self, width, color, center_x, center_y, radius_inner, radius_outer):
@@ -144,40 +147,57 @@ class train:
         self.myturtle.end_fill()
         
         self.myturtle.color(color)
-        self.rest()
 
 
     def rest(self):
         self.myturtle.up()
         self.myturtle.goto(-600,300)
         self.myturtle.setheading(90)
-    
 
+    def final_rest(self, pos_x,pos_y):
+        self.myturtle.up()
+        self.myturtle.goto(pos_x,pos_y)
+        self.myturtle.setheading(90)
+    
 
 def main():
     carriage_width=90
     carriage_length=180
     start_x=-700
     start_y=-300
-    myturtle = turtle.getscreen()
+    turtlescreen = turtle.getscreen()
     myturtle = turtle.Turtle()
     myturtle.shape('turtle')
     myturtle.width(5)    
     myplot = turtle_draw_shape(myturtle)
+    
+    ## Plot the background 
     myplot.plot_fillable_rec('chartreuse4',-1000, -500, 400, 2000)
     myplot.plot_fillable_rec('DeepSkyBlue',-1000, -100, 600, 2000)
 
     mytrain = train(myturtle)
+    ## Plot the track
     mytrain.track(5,'black',start_x-50, start_y - carriage_length/8, carriage_length* 8)
+    
+    ## Plot the carriages
     colors=("purple","blue","green","yellow","orange")
     for i in range(5):
         mytrain.carriage(5,colors[i],start_x+carriage_length*21/20*i,start_y,carriage_width,carriage_length)
     
+    ## Plot the locamotives
     mytrain.locamotive(5, 'red', start_x + 5*carriage_length*21/20, start_y, carriage_width*1.5, carriage_length*1.5)
+    
+    ## Plot the smoke
     for i in range(10):
         myplot.plot_oval( 2,'grey', start_x + (6.1)*carriage_length*21/20 - carriage_length/5*i*i/3 ,start_y +carriage_width*1.5*1.2 + carriage_width/4*i, (i+1)*carriage_width*1.5/25, (i+1)*carriage_width*1.5/25/2, 0, True)    
     myplot.rest()
-    myplot.plot_sun(4,'red',start_x + 7.5*carriage_length*21/20, 325, 100)
     
+    ## plot the sun
+    myplot.plot_sun(4,'red',start_x + 7.5*carriage_length*21/20, 325, 50)
+    
+    ## mytrain.final_rest(-600,500)
+    
+    turtlescreen.getcanvas().postscript(file="train.eps")
+
 if __name__=="__main__":
     main()
