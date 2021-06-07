@@ -138,6 +138,11 @@ class car:
         self.myturtle.goto(-600,300)
         self.myturtle.setheading(90)
             
+    def final_rest(self, pos_x,pos_y):
+        self.myturtle.up()
+        self.myturtle.goto(pos_x,pos_y)
+        self.myturtle.setheading(90)
+        
 
 def main():
     myturtle = turtle.getscreen()
@@ -149,7 +154,9 @@ def main():
     for i in range(4):
         mycar.window(5, 'blue', -400+i*200, 100, 100)
         
-    mycar.ladder(5,'yellow',150, 170, 450, 150, 20, 9 )
+    mycar.ladder(5,'black',150, 170, 450, 150, 20, 9 )
+    
+    mycar.final_rest(1000,1000)
     
 if __name__=="__main__":
     main()

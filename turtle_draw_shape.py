@@ -69,6 +69,53 @@ class turtle_draw_shape:
             self.myturtle.right(90)
         self.myturtle.rest()
 
+    def plot_rectangular(self, width, color, start_x, start_y, rec_height, rec_width):
+        self.myturtle.up()
+        self.myturtle.width(width)
+        self.myturtle.color(color)
+        self.myturtle.goto(start_x, start_y)
+        self.myturtle.setheading(90)
+        self.myturtle.down()
+        for i in range(2):
+            self.myturtle.forward(rec_height)
+            self.myturtle.right(90)
+            self.myturtle.forward(rec_width)
+            self.myturtle.right(90)
+        self.myturtle.down()
+        
+    def plot_fillable_rectangular(self, width, color_border, color_fill, start_x, start_y, rec_height, rec_width):
+        self.myturtle.up()
+        self.myturtle.width(width)
+        self.myturtle.color(color_border)
+        self.myturtle.fillcolor(color_fill)
+        self.myturtle.goto(start_x, start_y)
+        self.myturtle.setheading(90)
+        self.myturtle.down()
+        self.myturtle.begin_fill()
+        for i in range(2):
+            self.myturtle.forward(rec_height)
+            self.myturtle.right(90)
+            self.myturtle.forward(rec_width)
+            self.myturtle.right(90)
+            
+        self.myturtle.end_fill()
+        self.myturtle.up()
+        
+    def plot_upside_v(self, width, color, start_x, start_y, angle, roof_length):
+        self.myturtle.up()
+        self.myturtle.width(width)
+        self.myturtle.color(color)
+        self.myturtle.goto(start_x, start_y)
+        self.myturtle.setheading(90)
+        self.myturtle.down()
+        self.myturtle.right(angle)
+        self.myturtle.forward(roof_length)
+        self.myturtle.backward(roof_length)
+        self.myturtle.left(2*angle)
+        self.myturtle.forward(roof_length)
+        self.myturtle.backward(roof_length)
+        
+        
             
     def rest(self):
         self.myturtle.up()
