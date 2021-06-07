@@ -147,6 +147,7 @@ class car:
 def main():
     myturtle = turtle.getscreen()
     myturtle = turtle.Turtle()
+    myturtle.shapesize(2)
     mycar = car(myturtle)
     mycar.frame(5,'red')
     mycar.tyre(5,'grey',-325,-200,25,75)

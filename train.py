@@ -168,6 +168,7 @@ def main():
     turtlescreen = turtle.getscreen()
     myturtle = turtle.Turtle()
     myturtle.shape('turtle')
+    myturtle.shapesize(2)
     myturtle.width(5)    
     myplot = turtle_draw_shape(myturtle)
     
