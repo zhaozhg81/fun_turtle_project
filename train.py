@@ -131,7 +131,7 @@ class train:
         self.myturtle.up()
         self.myturtle.goto(center_x,center_y) ## Go to the center of the tyre
         self.myturtle.up()
-        self.myturtle.color(color)
+        self.myturtle.color('black')
         self.myturtle.goto( center_x+radius_outer, center_y)
         self.myturtle.down()
         self.myturtle.begin_fill()
